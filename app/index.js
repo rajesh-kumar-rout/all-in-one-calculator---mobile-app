@@ -1,141 +1,92 @@
 import { Link, Stack } from 'expo-router';
+import { useState } from 'react';
 import { Button, Image, Text, View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 
-function LogoTitle() {
-  return (
-    <Image
-      style={{ width: 50, height: 50 }}
-      source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }}
-    />
-  );
-}
-
 export default function Home() {
+  const links = [
+    {
+      id: 1,
+      label: "Standard",
+      link: "/"
+    },
+    {
+      id: 2,
+      label: "Percentage",
+      link: "/percentage"
+    },
+    {
+      id: 3,
+      label: "Age",
+      link: "/age"
+    },
+    {
+      id: 4,
+      label: "Date",
+      link: "/date"
+    },
+    {
+      id: 5,
+      label: "Interest",
+      link: "/interest"
+    },
+    {
+      id: 6,
+      label: "Geometry",
+      link: "/geometry"
+    },
+    {
+      id: 7,
+      label: "Binary",
+      link: "/binary"
+    },
+    {
+      id: 8,
+      label: "Exponent",
+      link: "/exponenet"
+    },
+    {
+      id: 9,
+      label: "Random Number Generator",
+      link: "/random"
+    },
+    {
+      id: 10,
+      label: "LCM",
+      link: "/lcm"
+    },
+    {
+      id: 11,
+      label: "GCD",
+      link: "/gcd"
+    },
+    {
+      id: 12,
+      label: "Prime Factorization",
+      link: "/factorization"
+    },
+    {
+      id: 13,
+      label: "Square Root",
+      link: "/root"
+    },
+    {
+      id: 14,
+      label: "Avarage",
+      link: "/avarage"
+    },
+  ]
+
   return (
-    <ScrollView>
-      <View style={styles.body}>
-      <Stack.Screen
-        options={{
-          // https://reactnavigation.org/docs/headers#setting-the-header-title
-          title: 'Home',
-          // https://reactnavigation.org/docs/headers#adjusting-header-styles
-          // headerStyle: { backgroundColor: '#f4511e' },
-          // headerTintColor: '#fff',
-          // headerTitleStyle: {
-          //   fontWeight: 'bold',
-          // },
-          // https://reactnavigation.org/docs/headers#replacing-the-title-with-a-custom-component
-          // headerTitle: props => <LogoTitle {...props} />,
-        }}
-      />
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => alert('HomeScreen')}
-        underlayColor='#fff'>
-        <Text style={styles.buttonText}>Standard Calculator</Text>
-      </TouchableOpacity>
-
-      <Link
-      href="/percentage"
-        style={styles.button}
-        underlayColor='#fff'>
-        <Text style={styles.buttonText}>Percentage Calculator</Text>
-      </Link>
-
-      <Link
-        style={styles.button}
-        href="/age"
-        underlayColor='#fff'>
-        <Text style={styles.buttonText}>Age Calculator</Text>
-      </Link>
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => alert('HomeScreen')}
-          underlayColor='#fff'>
-          <Text style={styles.buttonText}>Date Calculator</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => alert('HomeScreen')}
-          underlayColor='#fff'>
-          <Text style={styles.buttonText}>Interest Calculator</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => alert('HomeScreen')}
-          underlayColor='#fff'>
-          <Text style={styles.buttonText}>Geometry Calculator</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => alert('HomeScreen')}
-          underlayColor='#fff'>
-          <Text style={styles.buttonText}>Binary Calculator</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => alert('HomeScreen')}
-          underlayColor='#fff'>
-          <Text style={styles.buttonText}>Exponent Calculator</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => alert('HomeScreen')}
-          underlayColor='#fff'>
-          <Text style={styles.buttonText}>Random Number Generator</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => alert('HomeScreen')}
-          underlayColor='#fff'>
-          <Text style={styles.buttonText}>LCM Calculator</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => alert('HomeScreen')}
-          underlayColor='#fff'>
-          <Text style={styles.buttonText}>GCD Calculator</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => alert('HomeScreen')}
-          underlayColor='#fff'>
-          <Text style={styles.buttonText}>Prime Factorization Calculator</Text>
-        </TouchableOpacity>
-    </View>
+    <ScrollView className="flex-col gap-5 p-5">
+      {links.map(link => (
+        <Link
+          key={link.id}
+          href={link.link}
+          className="bg-indigo-600 rounded-md text-center p-4"
+        >
+          <Text className="text-white text-lg font-poppins font-medium">{link.label}</Text>
+        </Link>
+      ))}
     </ScrollView>
-  );
+  )
 }
-
-const styles = StyleSheet.create({
-  body: {
-    padding: 20,
-    flexDirection: "column",
-    gap: 20
-  },
-  button: {
-    paddingTop: 15,
-    paddingBottom: 15,
-    backgroundColor: '#4f46e5',
-    borderRadius: 6,
-    width: "100%",
-    textAlign: "center"
-  },
-  buttonText: {
-    color: '#fff',
-    textAlign: 'center',
-    fontSize: 18,
-    fontFamily: "Poppins-Regular",
-    fontWeight: "600"
-  }
-})
