@@ -1,10 +1,15 @@
-import { Link, Stack } from 'expo-router';
-import { Button, Image, Text, View, StyleSheet, TouchableOpacity, ScrollView, TextInput } from 'react-native';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { useState } from 'react';
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { useState } from "react";
+import { ScrollView, Text, TextInput, View } from "react-native"
 
 export default function Avarage() {
     const [numbers, setNumbers] = useState([0])
+    const [avg, setAvg] = useState(0)
+
+    useEffect(()=>{
+        const avg = numbers.reduce((sum, number) => sum + number) / numbers.length
+        setAvg(avg.toString().includes(".") ? setAvg(avg.toFixed(2)) : avg)
+    }, [numbers])
 
     return (
         <ScrollView className="p-5">
@@ -17,6 +22,7 @@ export default function Avarage() {
                                 className="border border-gray-300 rounded p-3 text-base font-poppins flex-1"
                                 inputMode="numeric"
                                 value={number}
+                                onChange={currentNumber => setNumbers(numbers.map((number, i) => i === index ? currentNumber : number))}
                             />
                             {index === 0 ? (
                                 <Ionicons name="add-outline" size={22} onPress={() => setNumbers([...numbers, 0])} />
@@ -29,7 +35,7 @@ export default function Avarage() {
             </View>
 
             <Text className="text-base mb-1 font-poppins">Avarage</Text>
-            <TextInput className="border border-gray-300 rounded p-3 text-base font-poppins" />
+            <TextInput className="border border-gray-300 rounded p-3 text-base font-poppins" value={avg} editable={false}/>
         </ScrollView>
     )
 }

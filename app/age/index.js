@@ -2,7 +2,7 @@ import { Link, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { Button, Image, Text, View, StyleSheet, TouchableOpacity, ScrollView, TextInput } from 'react-native';
 
-export default function Percentage() {
+export default function Age() {
   const links = [
     {
       id: 1,

@@ -35,16 +35,16 @@ export default function Layout() {
   if (!fontsLoaded) {
     return <Text>Loading...</Text>
   }
-  console.log(router.onStateChange);
-  useEffect(() => {
-    if(!pathname) return
+  // console.log(router.onStateChange);
+  // useEffect(() => {
+  //   if(!pathname) return
 
-    const route = routes.find(route => route.path === pathname)
+  //   const route = routes.find(route => route.path === pathname)
 
 
-    setCurrentRoute(route)
-    console.log(pathname);
-  }, [pathname, params])
+  //   setCurrentRoute(route)
+  //   console.log(pathname);
+  // }, [pathname, params])
 
   return (
     <>
