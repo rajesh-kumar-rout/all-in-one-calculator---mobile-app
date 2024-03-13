@@ -1,32 +1,34 @@
 import { useEffect, useState } from "react"
-import { ScrollView, Text, TextInput, View } from "react-native"
+import { ScrollView, Text, TextInput } from "react-native"
 
 export default function PercentageSimple() {
-    const [value, setValue] = useState(0)
-    const [percentage, setPercentage] = useState(0)
+    const [value, setValue] = useState("")
+    const [percentage, setPercentage] = useState("")
     const [answer, setAnswer] = useState(0)
 
     useEffect(() => {
-        const percentage = value * percentage / 100
-        setAnswer(percentage.toString().includes(".") ? percentage.toFixed(2) : percentage)
+        const _value = parseFloat(value)
+        const _percentage = parseFloat(percentage)
+
+        if(isNaN(_value) || isNaN(_percentage)) {
+            return setAnswer("")
+        }
+
+        const answer = (_percentage / 100) * _value
+        
+        setAnswer(answer.toString().includes(".") ? answer.toFixed(2) : answer)
     }, [value, percentage])
 
     return (
         <ScrollView className="p-5">
-            <View className="mb-6">
-                <Text className="text-base mb-1 font-poppins">Number</Text>
-                <TextInput className="border border-gray-300 rounded p-3 text-base font-poppins" value={value} onChangeText={setValue} />
-            </View>
+            <Text className="text-base mb-1 font-poppins">Value</Text>
+            <TextInput inputMode="numeric" className="border border-gray-300 mb-6 rounded p-3 text-base font-poppins" value={value} onChangeText={setValue} />
 
-            <View className="mb-6">
-                <Text className="text-base mb-1 font-poppins">Percentage</Text>
-                <TextInput className="border border-gray-300 rounded p-3 text-base font-poppins" value={percentage} onChangeText={setPercentage} />
-            </View>
+            <Text className="text-base mb-1 font-poppins">Percentage</Text>
+            <TextInput inputMode="numeric" className="border border-gray-300 mb-6 rounded p-3 text-base font-poppins" value={percentage} onChangeText={setPercentage} />
 
-            <View className="mb-6">
-                <Text className="text-base mb-1 font-poppins">Answer</Text>
-                <TextInput className="border border-gray-300 rounded p-3 text-base font-poppins" value={answer} editable={false} />
-            </View>
+            <Text className="text-base mb-1 font-poppins">Answer</Text>
+            <TextInput className="border border-gray-300 mb-6 rounded p-3 text-base font-poppins text-gray-900" value={answer.toString()} editable={false} />
         </ScrollView>
     )
 }

@@ -23,16 +23,16 @@ export default function Lcm() {
     }
 
     useEffect(() => {
-        const validNumbers = numbers.filter(number => number != 0)
+        const _numbers = numbers.map(number => parseFloat(number)).filter(number => !isNaN(number) && number !== 0)
 
-        if (validNumbers.length === 0) {
+        if (_numbers.length === 0) {
             return setLcm("")
         }
 
-        let lcm = getLargest(validNumbers)
+        let lcm = getLargest(_numbers)
 
         while (true) {
-            if (isDivisibleByAll(lcm, validNumbers)) {
+            if (isDivisibleByAll(lcm, _numbers)) {
                 setLcm(lcm)
                 break
             }
@@ -46,9 +46,9 @@ export default function Lcm() {
             <Text className="text-base mb-1 font-poppins">Numbers</Text>
 
             {numbers.map((number, index) => (
-                <View className="flex-row items-center gap-2 mb-2" key={index}>
+                <View className="flex-row items-center mb-2" key={index}>
                     <TextInput
-                        className="border border-gray-300 rounded p-3 text-base font-poppins flex-1"
+                        className="border border-gray-300 rounded p-3 text-base font-poppins flex-1 mr-2"
                         inputMode="numeric"
                         value={number}
                         onChangeText={currentNumber => setNumbers(numbers.map((number, i) => i === index ? currentNumber : number))}
@@ -65,10 +65,8 @@ export default function Lcm() {
                 </View>
             ))}
 
-            <View className="mt-4">
-                <Text className="text-base mb-1 font-poppins">Lcm</Text>
-                <TextInput className="border border-gray-300 rounded p-3 text-base font-poppins text-gray-900" editable={false} value={lcm.toString()} />
-            </View>
+            <Text className="text-base mb-1 font-poppins mt-4">Lcm</Text>
+            <TextInput className="border border-gray-300 rounded p-3 text-base font-poppins text-gray-900" editable={false} value={lcm.toString()} />
         </ScrollView>
     )
 }

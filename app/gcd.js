@@ -23,18 +23,18 @@ export default function Gcd() {
     }
 
     useEffect(() => {
-        const validNumbers = numbers.filter(number => number != 0)
+        const _numbers = numbers.map(number => parseFloat(number)).filter(number => !isNaN(number) && number !== 0)
 
-        if (validNumbers.length === 0) {
+        if (_numbers.length === 0) {
             return setGcd("")
         }
 
-        const smallestNumber = getSmallestNumber(validNumbers)
+        const smallestNumber = getSmallestNumber(_numbers)
 
         let gcd = 1
 
         for (let index = 2; index <= smallestNumber; index++) {
-            if (isDividesAll(index, validNumbers)) {
+            if (isDividesAll(index, _numbers)) {
                 gcd = index
             }
         }

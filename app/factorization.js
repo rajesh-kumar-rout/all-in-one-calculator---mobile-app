@@ -1,27 +1,33 @@
 import { useEffect, useState } from "react"
-import { ScrollView, Text, TextInput, View } from "react-native"
+import { ScrollView, Text, TextInput } from "react-native"
 
 export default function Factorization() {
-    const [number, setNumber] = useState(0)
+    const [number, setNumber] = useState("")
     const [factors, setFactors] = useState("")
 
     useEffect(() => {
-        let factors = []
+        let _number = parseFloat(number)
 
-        while (number % 2 === 0) {
-            factors.push(2)
-            number /= 2
+        if(isNaN(_number)) {
+            return setFactors("")
         }
 
-        for (let i = 3; i <= Math.sqrt(number); i += 2) {
-            while (number % i === 0) {
+        const factors = []
+
+        while (_number % 2 === 0) {
+            factors.push(2)
+            _number /= 2
+        }
+
+        for (let i = 3; i <= Math.sqrt(_number); i += 2) {
+            while (_number % i === 0) {
                 factors.push(i)
-                number /= i
+                _number /= i
             }
         }
 
-        if (number > 2) {
-            factors.push(number)
+        if (_number > 2) {
+            factors.push(_number)
         }
 
         setFactors(factors.join(", "))
@@ -29,15 +35,11 @@ export default function Factorization() {
 
     return (
         <ScrollView className="p-5">
-            <View className="mb-6 gap-1">
-                <Text className="text-base font-poppins">Number</Text>
-                <TextInput className="border border-gray-300 rounded p-3 text-base font-poppins" value={number} onChangeText={setNumber} />
-            </View>
+            <Text className="text-base font-poppins mb-1">Number</Text>
+            <TextInput inputMode="numeric" className="border border-gray-300 rounded p-3 text-base font-poppins mb-6" value={number} onChangeText={setNumber} />
 
-            <View className="gap-1">
-                <Text className="text-base font-poppins">Factors</Text>
-                <TextInput className="border border-gray-300 rounded p-3 text-base font-poppins" editable={false} value={factors} />
-            </View>
+            <Text className="text-base font-poppins mb-1">Factors</Text>
+            <TextInput className="border border-gray-300 rounded p-3 text-base font-poppins text-gray-900" editable={false} value={factors} />
         </ScrollView>
     )
 }
